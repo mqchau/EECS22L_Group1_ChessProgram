@@ -13,9 +13,9 @@
 /******************************************************************************/
 
 #include <stdio.h>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2_ttf/SDL_ttf.h>
+#include "SDL.h"
+#include "SDL_image.h"
+#include "SDL_ttf.h"
 #include "render.h"
 #include "constants.h"
 #include "display.h"
@@ -651,10 +651,10 @@ void drawChessboard(SDL_Renderer *renderer){
   blackTile.w = BOARD_WIDTH / 8;
   blackTile.h = BOARD_HEIGHT / 8;
   int tileSize = whiteTile.w;
+  int i,j;  
+  for(i = 0; i < 8; i++){
     
-  for(int i = 0; i < 8; i++){
-    
-    for(int j = 0; j < 8; j++){
+    for(j = 0; j < 8; j++){
       whiteTile.x = j * tileSize + SCREEN_WIDTH/2 - 4*tileSize;
       whiteTile.y = i * tileSize + SCREEN_HEIGHT/2 - 4*tileSize;
       blackTile.x = j * tileSize + SCREEN_WIDTH/2 - 4*tileSize;

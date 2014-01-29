@@ -1,9 +1,11 @@
 CX = gcc
-SDL = -framework SDL2 -framework SDL2_ttf -framework SDL2_image
-CFLAGS = -Wall -c 
-LFLAGS = $(SDL)
+SDL = $(shell pkg-config --cflags --libs sdl2 SDL2_ttf SDL2_image)
+CFLAGS = -Wall -c $(SDL)
+LFLAGS = $(SDL) 
 EXE = Chess
 
+
+$(info compile flags = $(SDL))
 
 all: $(EXE)
 
@@ -20,7 +22,7 @@ TestDrawingFuncs.o: TestDrawingFuncs.c constants.h render.h display.h sdlUtiliti
 	$(CX) $(CFLAGS) TestDrawingFuncs.c -o TestDrawingFuncs.o
 
 $(EXE): TestDrawingFuncs.o render.o display.o sdlUtilities.o
-	$(CX) $(LFLAGS) TestDrawingFuncs.o render.o display.o sdlUtilities.o -o $(EXE)
+	$(CX)  TestDrawingFuncs.o render.o display.o sdlUtilities.o $(LFLAGS) -o $(EXE)
 
 clean:
 	rm *.o && rm $(EXE)
