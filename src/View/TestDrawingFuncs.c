@@ -40,6 +40,7 @@ int main(int argc, char *argv[]){
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
     
+<<<<<<< HEAD
     int zeroCase = 0;
     int *screenMode;     /* 0 = main, 1 = one player, 2 = two players, 3 = game screen, 100 = esc */
     screenMode = &zeroCase;
@@ -71,6 +72,14 @@ int main(int argc, char *argv[]){
 
     /* drawOnePlayerMenu(window, renderer); */
 
+=======
+    /* testing draw functions here; they are not yet linked with events handling/bools */
+    /* so only one draw can be run at a time right now */
+    drawMainMenu(window, renderer);
+
+    /* drawOnePlayerMenu(window, renderer); */
+
+>>>>>>> b606ed2793e719a0b419c56c6b1965bbe8065caf
     /* drawTwoPlayerMenu(window, renderer); */
    
     /* drawAdvancedMenu(window, renderer); */

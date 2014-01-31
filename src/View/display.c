@@ -44,7 +44,10 @@ int drawMainMenu(SDL_Window *window, SDL_Renderer *renderer, int *screenMode){
   SDL_RenderPresent(renderer);
 
   int done = 0;
+<<<<<<< HEAD
 
+=======
+>>>>>>> b606ed2793e719a0b419c56c6b1965bbe8065caf
   int buttonWidth = 0, buttonHeight = 0;
   int x_pos = 0, y_pos = 0;
 
@@ -59,6 +62,7 @@ int drawMainMenu(SDL_Window *window, SDL_Renderer *renderer, int *screenMode){
       switch(event.type){
 
       case SDL_QUIT:
+<<<<<<< HEAD
 	*screenMode = 100;
 	done = 1;
 	break;
@@ -69,11 +73,21 @@ int drawMainMenu(SDL_Window *window, SDL_Renderer *renderer, int *screenMode){
 	}
 	break;
 	
+=======
+	done = 1;
+	break;
+      case SDL_KEYUP:
+	if(event.key.keysym.sym == SDLK_ESCAPE)
+	  done = 1;
+	break;
+ 
+>>>>>>> b606ed2793e719a0b419c56c6b1965bbe8065caf
       case SDL_MOUSEBUTTONDOWN:
       	if(event.button.button == SDL_BUTTON_LEFT){
       	  x_pos = event.button.x;
 	  y_pos = event.button.y;
 
+<<<<<<< HEAD
 	  /* one player options */
 	  if(x_pos > SCREEN_WIDTH*0.6 && x_pos < SCREEN_WIDTH*0.6 + buttonWidth
 	     && y_pos > SCREEN_HEIGHT/2.5 && y_pos < SCREEN_HEIGHT/2.5 + buttonHeight){
@@ -103,6 +117,27 @@ int drawMainMenu(SDL_Window *window, SDL_Renderer *renderer, int *screenMode){
     }    
   }
   return *screenMode;
+=======
+	  if(x_pos > SCREEN_WIDTH*0.6 && x_pos < SCREEN_WIDTH*0.6 + buttonWidth
+	     && y_pos > SCREEN_HEIGHT/2.5 && y_pos < SCREEN_HEIGHT/2.5 + buttonHeight){
+	    drawOnePlayerMenu(window, renderer);
+	    break;
+	  }
+	  if(x_pos > SCREEN_WIDTH*0.6 && x_pos < SCREEN_WIDTH*0.6 + buttonWidth
+	     && y_pos > SCREEN_HEIGHT/2.5 + buttonHeight && y_pos < SCREEN_HEIGHT/2.5 + 2*buttonHeight){
+	    drawTwoPlayerMenu(window, renderer);
+	    break;
+	  }
+	  if(x_pos > SCREEN_WIDTH*0.6 && x_pos < SCREEN_WIDTH*0.6 + buttonWidth
+	     && y_pos > SCREEN_HEIGHT/2.5 + 2*buttonHeight && y_pos < SCREEN_HEIGHT/2.5 + 3*buttonHeight){
+	    drawGameplayScreen(window, renderer);
+	    break;
+	  }
+      	}      	
+      }      
+    }    
+  }
+>>>>>>> b606ed2793e719a0b419c56c6b1965bbe8065caf
 }
 
 
@@ -186,6 +221,12 @@ int drawOnePlayerMenu(SDL_Window *window, SDL_Renderer *renderer, int *screenMod
   /* create play button */
   SDL_Texture *play_Button = renderText("Play", CALIBRI_FONT, buttonColor, 50, renderer);
   renderTexture2(play_Button, renderer, SCREEN_WIDTH - leftMargin - stringWidth, SCREEN_HEIGHT/5 + 7*stringHeight);
+<<<<<<< HEAD
+=======
+
+  SDL_RenderPresent(renderer);
+}
+>>>>>>> b606ed2793e719a0b419c56c6b1965bbe8065caf
 
   SDL_RenderPresent(renderer);
 
@@ -340,6 +381,7 @@ int drawTwoPlayerMenu(SDL_Window *window, SDL_Renderer *renderer, int *screenMod
   renderTexture2(play_Button, renderer, SCREEN_WIDTH - leftMargin - stringWidth, SCREEN_HEIGHT/5 + 7*stringHeight);
 
   SDL_RenderPresent(renderer);
+<<<<<<< HEAD
 
   int done = 0;
   int x_pos = 0, y_pos = 0;
@@ -390,6 +432,8 @@ int drawTwoPlayerMenu(SDL_Window *window, SDL_Renderer *renderer, int *screenMod
     }    
   }
   return *screenMode;
+=======
+>>>>>>> b606ed2793e719a0b419c56c6b1965bbe8065caf
 }
 
 /* function to display the advanced menu to the screen */

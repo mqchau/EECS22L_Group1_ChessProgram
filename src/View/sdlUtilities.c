@@ -61,6 +61,7 @@ void mainMenuEvents(SDL_Window *window, SDL_Renderer *renderer){
 	  done = 1;
 	break;
       case SDL_MOUSEMOTION:
+<<<<<<< HEAD
 	/* if(event.motion.x > SCREEN_WIDTH*0.6 && event.motion.x < SCREEN_WIDTH*0.6 + buttonWidth */
 	/*    && event.motion.y > SCREEN_HEIGHT/2.5 && event.motion.y < SCREEN_HEIGHT/2.5 + buttonHeight){ */
 	/*   SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); */
@@ -88,6 +89,35 @@ void mainMenuEvents(SDL_Window *window, SDL_Renderer *renderer){
 	/*   break; */
 	/* } */
 	/* else; */
+=======
+	if(event.motion.x > SCREEN_WIDTH*0.6 && event.motion.x < SCREEN_WIDTH*0.6 + buttonWidth
+	   && event.motion.y > SCREEN_HEIGHT/2.5 && event.motion.y < SCREEN_HEIGHT/2.5 + buttonHeight){
+	  SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+	  SDL_RenderClear(renderer);
+	  drawOnePlayerMenu(window, renderer);
+	  done = 1;
+	  break;
+	}
+	else if(event.motion.x > SCREEN_WIDTH*0.6 && event.motion.x < SCREEN_WIDTH*0.6 + buttonWidth
+		&& event.motion.y > SCREEN_HEIGHT/2.5 + buttonHeight
+		&& event.motion.y < SCREEN_HEIGHT/2.5 + 2*buttonHeight){
+	  SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+	  SDL_RenderClear(renderer);
+	  drawTwoPlayerMenu(window, renderer);
+	  done = 1;
+	  break;
+	}
+	else if(event.motion.x > SCREEN_WIDTH*0.6 && event.motion.x < SCREEN_WIDTH*0.6 + buttonWidth
+		&& event.motion.y > SCREEN_HEIGHT/2.5 + 2*buttonHeight
+		&& event.motion.y < SCREEN_HEIGHT/2.5 + 3*buttonHeight){
+	  SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+	  SDL_RenderClear(renderer);
+	  drawGameplayScreen(window, renderer);
+	  done = 1;
+	  break;
+	}
+	else;
+>>>>>>> b606ed2793e719a0b419c56c6b1965bbe8065caf
 	break;
 	
       }
