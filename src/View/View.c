@@ -1,5 +1,7 @@
 #include "View.h"
 
+
+
 unsigned char AskUserChooseColor(){
 	unsigned char ValidFlag = 0;
 	unsigned int ReturnChoice;

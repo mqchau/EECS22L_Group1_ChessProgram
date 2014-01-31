@@ -11,8 +11,8 @@
 /*                   dimensions                                         */
 /************************************************************************/
 
-#include <stdio.h>
 #include "render.h"
+
 
 /* function to load a texture */
 SDL_Texture *loadTexture(const char *fileName, SDL_Renderer *renderer){

@@ -1,11 +1,5 @@
-#include <stdio.h>
-#include "SDL.h"
-#include "SDL_image.h"
-#include "SDL_ttf.h"
-#include "render.h"
-#include "display.h"
-#include "constants.h"
 #include "sdlUtilities.h"
+
 
 void eventMain(){
 

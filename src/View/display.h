@@ -13,6 +13,12 @@
 #define DISPLAY_H
 
 #include <stdio.h>
+#include "SDL.h"
+#include "SDL_image.h"
+#include "SDL_ttf.h"
+#include "render.h"
+#include "constants.h"
+#include "display.h"
 
 /* function to display the main menu to the screen */
 int drawMainMenu(SDL_Window *window, SDL_Renderer *renderer, int *screenMode);
