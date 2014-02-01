@@ -44,6 +44,10 @@ void drawChessboard(SDL_Renderer *renderer);
 /* function to display the pieces in beginning position on the chessboard */
 void drawPieces(SDL_Renderer *renderer);
 
+void drawBox(SDL_Renderer *boxRenderer, int x, int y, int w, int h);
+
+void clearBox(SDL_Renderer *boxRenderer, int x, int y, int w, int h);
+
 /* function to uninitialize SDL systems */
 void clean();
 
