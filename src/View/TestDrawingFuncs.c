@@ -77,6 +77,7 @@ int main(int argc, char *argv[]){
 
       int x_box = 0, y_box = 0;
       int x_pos = 0, y_pos = 0;
+      int pieceClicked = 0;
 
       SDL_Event event;
 
@@ -88,13 +89,27 @@ int main(int argc, char *argv[]){
       	    if(event.button.button == SDL_BUTTON_LEFT){
       	      x_pos = event.button.x;
       	      y_pos = event.button.y;
+
+	      /* piece clicked */
 	      if(x_pos > (SCREEN_WIDTH - BOARD_WIDTH)/2 && x_pos < SCREEN_WIDTH - (SCREEN_WIDTH - BOARD_WIDTH)/2
 		 && y_pos > (SCREEN_HEIGHT - BOARD_HEIGHT)/2 && y_pos < SCREEN_HEIGHT - (SCREEN_HEIGHT - BOARD_HEIGHT)/2){
+		/* check actual piece is clicked here */
+
 		x_box = (x_pos/(BOARD_WIDTH/8)) * (BOARD_WIDTH/8);	    
 		y_box = (SCREEN_HEIGHT-BOARD_HEIGHT)/2 + (((BOARD_HEIGHT*y_pos)/SCREEN_HEIGHT)/75 * 75);
-		
+		pieceClicked = 1;
 		drawGameplayScreen(window, renderer);
 		drawBox(renderer, x_box, y_box, BOARD_WIDTH/8, BOARD_WIDTH/8);
+		break;
+	      }
+	      /* move selected */
+	      if(pieceClicked 
+		 && x_pos > (SCREEN_WIDTH - BOARD_WIDTH)/2 && x_pos < SCREEN_WIDTH - (SCREEN_WIDTH - BOARD_WIDTH)/2
+		 && y_pos > (SCREEN_HEIGHT - BOARD_HEIGHT)/2 && y_pos < SCREEN_HEIGHT - (SCREEN_HEIGHT - BOARD_HEIGHT)/2){
+		/* check selected move is legal here */
+
+		clearBox(renderer, x_box, y_box, BOARD_WIDTH/8, BOARD_WIDTH/8);
+		
 	      }
       	      playing = 0;
       	      break;
