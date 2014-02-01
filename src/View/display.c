@@ -158,6 +158,7 @@ int drawOnePlayerMenu(SDL_Window *window, SDL_Renderer *renderer, int *screenMod
   SDL_Color titleColor = {0xA8, 0xC6, 0xDB}; /* this color is static */
   SDL_Color optionColor = {255, 255, 255};/* this color is static */
   SDL_Color buttonColor = {255, 255, 255}; /* this color is dynamic; default white */
+  SDL_Color greenText = {0x29, 0xEF, 0x48};
 
   /* rename window title */
   SDL_SetWindowTitle(window, "One Player Options");
@@ -232,8 +233,12 @@ int drawOnePlayerMenu(SDL_Window *window, SDL_Renderer *renderer, int *screenMod
 
   int done = 0;
   int x_pos = 0, y_pos = 0;
-
+  int tempWidth = 0, tempHeight = 0;
   SDL_Event event;
+
+  /* colorOption = renderText("Color:", CALIBRI_FONT, optionColor, 50, renderer); */
+  SDL_QueryTexture(colorOption, NULL, NULL, &tempWidth, NULL);
+  SDL_QueryTexture(colorOption, NULL, NULL, NULL, &tempHeight);
 
   while(!done){
 
@@ -251,6 +256,72 @@ int drawOnePlayerMenu(SDL_Window *window, SDL_Renderer *renderer, int *screenMod
 	  done = 1;
 	}
 	break;
+
+      case SDL_MOUSEMOTION:
+	/* color buttons */
+	/* highlight when mouse over black button */
+	if(event.motion.x > leftMargin + tempWidth + 25 && event.motion.x < leftMargin + 2*tempWidth + 15
+	   && event.motion.y > SCREEN_HEIGHT/5 + 10 && event.motion.y < SCREEN_HEIGHT/5 + tempHeight - 18){
+	  black_Button = renderText("Black", CALIBRI_FONT, greenText, 50, renderer);
+	  renderTexture2(black_Button, renderer, leftMargin + tempWidth + 25, SCREEN_HEIGHT/5);
+	  SDL_RenderPresent(renderer);
+	  break; 
+	}
+	/* highlight when mouse over white button */
+	else if(event.motion.x > leftMargin + tempWidth + 25 && event.motion.x < leftMargin + 2*tempWidth + 25
+	   && event.motion.y > SCREEN_HEIGHT/5 + tempHeight + 10 && event.motion.y < SCREEN_HEIGHT/5 + 2*tempHeight - 10){
+	  white_Button = renderText("White", CALIBRI_FONT, greenText, 50, renderer);
+	  renderTexture2(white_Button, renderer, leftMargin + tempWidth + 25, SCREEN_HEIGHT/5 + tempHeight);
+	  SDL_RenderPresent(renderer);
+	  break;
+	}
+	/* difficulty buttons */
+	/* highlight when mouse over easy button */
+	else if(event.motion.x > rightMargin + tempWidth + 100 && event.motion.x < rightMargin + tempWidth + 180
+	   && event.motion.y > SCREEN_HEIGHT/5 + 15 && event.motion.y < SCREEN_HEIGHT/5 + tempHeight - 15){
+	  easy_Button = renderText("Easy", CALIBRI_FONT, greenText, 50, renderer);
+	  renderTexture2(easy_Button, renderer, rightMargin + 2*tempWidth - 21, SCREEN_HEIGHT/5);
+	  SDL_RenderPresent(renderer);
+	  break;
+	}
+	/* highlight when mouse over moderate button */
+	else if(event.motion.x > rightMargin + tempWidth + 100 && event.motion.x < rightMargin + tempWidth + 300
+	   && event.motion.y > SCREEN_HEIGHT/5 + tempHeight + 10 && event.motion.y < SCREEN_HEIGHT/5 + 2*tempHeight - 10){
+	  moderate_Button = renderText("Moderate", CALIBRI_FONT, greenText, 50, renderer);
+	  renderTexture2(moderate_Button, renderer, rightMargin + tempWidth + 99, SCREEN_HEIGHT/5 + tempHeight);
+	  SDL_RenderPresent(renderer);
+	  break;
+	}
+	/* /\* highlight when mouse over challenging button *\/ */
+	else if(event.motion.x > rightMargin + tempWidth + 100 && event.motion.x < rightMargin + tempWidth + 325
+	   && event.motion.y > SCREEN_HEIGHT/5 + tempHeight + 75 && event.motion.y < SCREEN_HEIGHT/5 + 3*tempHeight - 10){
+	  hard_Button = renderText("Challenging", CALIBRI_FONT, greenText, 50, renderer);
+	  renderTexture2(hard_Button, renderer, rightMargin + tempWidth + 99, SCREEN_HEIGHT/5 + 2*tempHeight);
+	  SDL_RenderPresent(renderer);
+	  break;
+	}
+	/* highlight when mouse over main menu button */
+	else if(event.motion.x > leftMargin && event.motion.x < leftMargin + 2*tempWidth
+	   && event.motion.y > SCREEN_HEIGHT/5 + 7*tempHeight && event.motion.y < SCREEN_HEIGHT/5 + 8*tempHeight){
+	  mainMenu_Button = renderText("Main Menu", CALIBRI_FONT, greenText, 50, renderer);
+	  renderTexture2(mainMenu_Button, renderer, leftMargin, SCREEN_HEIGHT/5 + 7*tempHeight);
+	  SDL_RenderPresent(renderer);
+	  break;
+	}
+	/* highlight when mouse over play button */
+	else if(event.motion.x > SCREEN_WIDTH - 2*tempWidth && event.motion.x < SCREEN_WIDTH - 2*tempWidth + 80
+	   && event.motion.y > SCREEN_HEIGHT/5 + 7*tempHeight + 20 && event.motion.y < SCREEN_HEIGHT/5 + 8*stringHeight - 10){
+	  play_Button = renderText("Play", CALIBRI_FONT, greenText, 50, renderer);
+	  renderTexture2(play_Button, renderer, SCREEN_WIDTH - 2*tempWidth - 4, SCREEN_HEIGHT/5 + 7*tempHeight);
+	  SDL_RenderPresent(renderer);
+	  break;
+	}
+	/* default view */
+	else{
+	  *screenMode = 1;
+	  done = 1;
+	  break;
+	}
  
       case SDL_MOUSEBUTTONDOWN:
       	if(event.button.button == SDL_BUTTON_LEFT){
