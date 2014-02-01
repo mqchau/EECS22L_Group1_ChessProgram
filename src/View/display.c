@@ -507,6 +507,9 @@ int drawTwoPlayerMenu(SDL_Window *window, SDL_Renderer *renderer, int *screenMod
 /* function to display the advanced menu to the screen */
 void drawAdvancedMenu(SDL_Window *window, SDL_Renderer *renderer){
 
+  SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+  SDL_RenderClear(renderer);
+
   int margin         = 0;
   int titleWidth     = 0;
   int buttonWidth    = 0;
@@ -907,6 +910,25 @@ void drawPieces(SDL_Renderer *renderer){
   renderTexture(piece, renderer, pieceSize*3 + x_Offset, pieceSize*7 + y_Offset, pieceSize, pieceSize);
 }
 
+/* function to draw a green box around a clicked piece */
+void drawBox(SDL_Renderer *boxRenderer, int x, int y, int w, int h){
+
+  SDL_Rect greenBox = {x, y, w, h};
+  SDL_SetRenderDrawColor(boxRenderer, 0x29, 0xEF, 0x48, 0x48);
+  SDL_RenderDrawRect(boxRenderer, &greenBox);
+  SDL_RenderPresent(boxRenderer);
+
+}
+
+/* function to erase the green box after a piece move */
+void clearBox(SDL_Renderer *boxRenderer, int x, int y, int w, int h){
+
+  SDL_Rect clearBox = {x, y, w, h};
+  SDL_SetRenderDrawColor(boxRenderer, 0, 0, 0, 0);
+  SDL_RenderDrawRect(boxRenderer, &clearBox);
+  SDL_RenderPresent(boxRenderer);  
+
+}
 
 /* function to uninitialize SDL systems */
 void clean(){
