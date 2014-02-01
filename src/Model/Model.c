@@ -164,6 +164,97 @@ Boolean Model_Stalemate(ChessBoard * board, ChessPlayer * player)
 	return False;
 }
 
+/* create and write to log file */
+int writeToLogFile(char fname[100], ChessMoveList * moveList)
+{
+	/* creating the file */
+	FILE *File;
+	
+	/* file type */
+	char ftype[] = ".txt";
+	
+	/* a copy of the file name */
+	char fname_tmp[100];  
+	
+	/* node pointer to traverses the list */
+	ChessMoveNode * temp = moveList->FirstNode;
+	
+	/* move counter */
+	int counter = 1;
+
+	/* copy file name to new file */
+    strcpy(fname_tmp, fname);
+	
+	/* concat the file type to the name */
+	strcat(fname_tmp, ftype);
+
+	/* open the file */
+	File = fopen(fname_tmp, "w");
+	
+	/* file could not be open */
+	if (!File) {
+		printf("Cannot open file \"%s\" for writing!\n", fname);
+		return 1;
+	}
+	
+	/* going though the list and printing the move */
+	while (temp)
+	{
+		/*printing the move type */
+		fprintf(File, "%s", temp->Move->MoveType);
+		
+		/* print a special move */
+		if (temp->Move->MoveType != Normal)
+		{
+			
+		}
+		
+		/* print a normal move */
+		else
+		{
+			fprintf(File, "  Move #%d: %s move from %s to %s", counter, 
+				temp->Move->MovePiece->Type, temp->Move->StartPosition, temp->Move->NextPosition);
+		}
+		
+		/* print the capture piece */
+		if (temp->Move->CaptureFlag == True)
+		{
+			/* a somewhat special message if the queen is capture */
+			if (temp->Move->CapturePiece->Type == Queen)
+			{
+				fprintf(File, "    %s player has captured the graceful %s", temp->Move->MovePiece->Player->PlayerColor, "Queen");
+			}
+			
+			/* capture message for everything else besides king */
+			else
+			{
+				fprintf(File, "    %s has captured a %s", temp->Move->MovePiece->Player->PlayerColor, temp->Move->CapturePiece->Type);
+			}
+		}
+			
+		/* advance the node */
+		temp = temp->NextNode;
+		
+		/* increase the counter */
+		counter++;
+	}
+	
+	/* un able to open or an error */
+	if (ferror(File)) 
+	{
+		printf("\nFile error while writing to file!\n");
+		return 2;
+	}
+	
+	/* close the file */
+	fclose(File);
+	
+	/*print that the file was saved successfully */
+	printf("%s was saved successfully. \n", fname_tmp);
+
+	return (0);
+}
+
 /* uses GetLegalCoordinates */
 /* see if move is legal */
 Boolean Model_CheckLegalMove(ChessBoard * board, ChessMove * moveTo)
