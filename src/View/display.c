@@ -344,11 +344,11 @@ int drawOnePlayerMenu(SDL_Window *window, SDL_Renderer *renderer, int *screenMod
 	    break;
 	  }
 
-	  /* color choices */    /* working: interface with data structure (color choice) here */
+	  /* color choices    working: interface with data structure (color choice) here */
 	  /* black */
 	  /* if(x_pos > leftMargin + stringWidth - 50  && x_pos < leftMargin + 2*stringWidth - 130 */
 	  /*    && y_pos > SCREEN_HEIGHT/5 && y_pos < SCREEN_HEIGHT/5 + stringHeight){ */
-	   
+ 
 	  /*   done = 1; */
 	  /*   break; */
 	  /* } */
@@ -643,6 +643,11 @@ void drawLeftPlayerWindow(SDL_Renderer *renderer, int tileSize, int playerMode){
   SDL_RenderDrawLine(renderer, margin + tileSize, SCREEN_HEIGHT/2 - 3*tileSize, margin + tileSize, SCREEN_HEIGHT/2 - tileSize);
   SDL_RenderDrawLine(renderer, margin + 2*tileSize, SCREEN_HEIGHT/2 - 3*tileSize, margin + 2*tileSize, SCREEN_HEIGHT/2 - tileSize);
 
+
+  /* display computer header */
+  /* SDL_Texture *computerHeader = renderText("C o m p u t e r", CALIBRI_FONT, headerColor, 30, renderer); */
+  /* renderTexture2(computerHeader, renderer, margin + 30, SCREEN_HEIGHT/2 - 4*tileSize); */
+
   /* display player 2 header */
   SDL_Texture *playerTwoHeader = renderText("P l a y e r  2", CALIBRI_FONT, headerColor, 30, renderer);
   SDL_QueryTexture(playerTwoHeader, NULL, NULL, &headerWidth, NULL);
@@ -711,6 +716,10 @@ void drawRightPlayerWindow(SDL_Renderer *renderer, int tileSize, int playerMode)
   SDL_RenderDrawLine(renderer, xMargin, yMargin + 2*tileSize, xMargin + 3*tileSize, yMargin + 2*tileSize);
   SDL_RenderDrawLine(renderer, xMargin + tileSize, yMargin + tileSize, xMargin + tileSize, yMargin +3*tileSize);
   SDL_RenderDrawLine(renderer, xMargin + 2*tileSize, yMargin + tileSize, xMargin + 2*tileSize, yMargin + 3*tileSize);
+
+  /* display computer header */
+  /* SDL_Texture *computerHeader = renderText("C o m p u t e r", CALIBRI_FONT, headerColor, 30, renderer); */
+  /* renderTexture2(computerHeader, renderer, xMargin + 30, yMargin); */
 
   /* display player 1 header */
   SDL_Texture *playerOneHeader = renderText("P l a y e r  1", CALIBRI_FONT, headerColor, 30, renderer);
