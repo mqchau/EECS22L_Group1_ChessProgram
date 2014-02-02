@@ -43,9 +43,9 @@ ControlHandle * Control_MainLoop(ControlHandle * Handle){
 	while (GameOnFlag){
 	  ChessPlayer_UpdateTime(CurrentPlayer);
 	  if (CurrentPlayer->OtherPlayer->PlayerColor == 1)
-	  printf("Elapsed time of black player is %lf seconds.\n", CurrentPlayer->OtherPlayer->ElapsedTime);
+	    printf("Total elapsed time of black player is %.2d:%.2d.\n", (int)(CurrentPlayer->OtherPlayer->ElapsedTime)/60, (int)(CurrentPlayer->OtherPlayer->ElapsedTime)%60);
 	  else if (CurrentPlayer->OtherPlayer->PlayerColor == 0)
-	  printf("Elapsed time of white player is %lf seconds.\n", CurrentPlayer->OtherPlayer->ElapsedTime);
+	  printf("Total elapsed time of white player is %.2d:%.2d.\n", (int)(CurrentPlayer->OtherPlayer->ElapsedTime)/60, (int)(CurrentPlayer->OtherPlayer->ElapsedTime)%60);
 	 	 UndoMoveFlag = False;
 	 
 		if (CurrentPlayer->PlayerControl == Human){
