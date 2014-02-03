@@ -29,7 +29,7 @@ void drawMainMenu(ViewHandle * MainHandle){
 	SDL_Color greenText = {0x29, 0xEF, 0x48};
 
 	/* rename window title */
-	SDL_SetWindowTitle(window, "quan's title");
+	SDL_SetWindowTitle(window, "Chess XIV - Main Menu");
 	/* create main menu background image */
 	ObjectHandle * backSplashObject = ObjectHandle_Initialize(Image, Background, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 	printf("%d  %d\n", backSplashObject->Width, backSplashObject->Height);
@@ -117,6 +117,8 @@ void drawMainMenu(ViewHandle * MainHandle){
 }
 
 void drawOnePlayerMenu(ViewHandle * MainHandle){
+
+  SDL_SetWindowTitle(window, "Chess XIV - Options");
 
   void ObjectHandleList_DeepFree(ObjectHandleList * List);
 
@@ -225,6 +227,8 @@ void drawOnePlayerMenu(ViewHandle * MainHandle){
 }
 
 void drawChessBoard(ViewHandle * MainHandle){
+
+  SDL_SetWindowTitle(window, "Chess XIV - Gameplay");
 
   SDL_SetRenderDrawColor(MainHandle->CurrentWindow->WindowRenderer, 0, 0, 0, 0);
   SDL_RenderClear(MainHandle->CurrentWindow->WindowRenderer);
