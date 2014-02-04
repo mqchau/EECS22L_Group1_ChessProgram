@@ -140,7 +140,7 @@ AIDifficultyLevel AskAIDifficultyLevel(void){
 }
 
 Event * SetOptions(ViewHandle * MainViewHanlde, ChessBoard * MainBoard){
-	AskPlayerControl(MainBoard->WhitePlayer);
+	MainBoard->WhitePlayer->PlayerControl = AskPlayerControl(MainBoard->WhitePlayer);
 	if (MainBoard->WhitePlayer->PlayerControl == AI){
 		MainBoard->WhitePlayer->AIDifficulty = AskAIDifficultyLevel();
 	}
@@ -286,6 +286,8 @@ void HighlightCoordinates(ViewHandle * MainViewHandle, ChessBoard * CurrChessBoa
 ViewHandle * View_Initialize(void){
 	ViewHandle * ReturnHandle = malloc(sizeof(ViewHandle));
 	ReturnHandle->CurrentPlayer = NULL;
+	ReturnHandle->ViewHandleEvent = malloc(sizeof(ViewHandle));
+	assert(ReturnHandle->ViewHandleEvent);
 	return ReturnHandle;
 }
 
@@ -345,7 +347,7 @@ ViewHandle * View_CleanUp(ViewHandle *MainHandle){
 	
 	ObjectHandleList_ShallowFree(MainHandle->CurrentWindow->ObjectList);
 	free(MainHandle->CurrentWindow);
-	free(MainHandle->ViewHandldeEvent);
+	free(MainHandle->ViewHandleEvent);
 	free(MainHandle);
 	return NULL;
 	

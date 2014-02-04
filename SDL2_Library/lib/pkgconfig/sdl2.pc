@@ -1,6 +1,10 @@
 # sdl pkg-config source file
 
+<<<<<<< HEAD
 prefix=/home/Andrew Trinh/EECS22L_Group1_ChessProgram/SDL2_Library
+=======
+prefix=/users/ugrad2/2013/winter/team1/EECS22L_Group1_ChessProgram/SDL2_Library
+>>>>>>> e2450e8670de86b9357007c33180b16552b3ad9e
 #prefix=~/SDL_lib_at_school/SDL2
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib

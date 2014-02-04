@@ -1069,14 +1069,17 @@ ChessMove * Model_GetBestMove(ChessBoard * board, ChessPlayer * player, ChessMov
 				}
 				if (ChessMoveList_Count(history) == 6)
 				{
-					ChessMove * newMove = ChessMove_Initialize();
-					newMove->MovePiece = board->Board[4][7]->Piece;
-					newMove->StartPosition = board->Board[4][7];
-					newMove->NextPosition = board->Board[6][5];
-					if (Model_CheckLegalMove(board, newMove, history))
+					if (!(board->Board[5][6]->Piece))
 					{
-						return newMove;
-					}											
+						ChessMove * newMove = ChessMove_Initialize();
+						newMove->MovePiece = board->Board[4][7]->Piece;
+						newMove->StartPosition = board->Board[4][7];
+						newMove->NextPosition = board->Board[6][5];
+						if (Model_CheckLegalMove(board, newMove, history))
+						{
+							return newMove;
+						}	
+					}
 				}					
 				
 			}
@@ -1106,6 +1109,7 @@ ChessMove * Model_GetBestMove(ChessBoard * board, ChessPlayer * player, ChessMov
 				}
 				if (ChessMoveList_Count(history) == 5)
 				{
+
 					ChessMove * newMove = ChessMove_Initialize();
 					newMove->MovePiece = board->Board[7][3]->Piece;
 					newMove->StartPosition = board->Board[7][3];
@@ -1113,18 +1117,21 @@ ChessMove * Model_GetBestMove(ChessBoard * board, ChessPlayer * player, ChessMov
 					if (Model_CheckLegalMove(board, newMove, history))
 					{
 						return newMove;
-					}											
+					}	
 				}
 				if (ChessMoveList_Count(history) == 7)
-				{
-					ChessMove * newMove = ChessMove_Initialize();
-					newMove->MovePiece = board->Board[3][7]->Piece;
-					newMove->StartPosition = board->Board[3][7];
-					newMove->NextPosition = board->Board[1][5];
-					if (Model_CheckLegalMove(board, newMove, history))
+				{ 	
+					if (!(board->Board[2][6]->Piece))
 					{
-						return newMove;
-					}											
+						ChessMove * newMove = ChessMove_Initialize();
+						newMove->MovePiece = board->Board[3][7]->Piece;
+						newMove->StartPosition = board->Board[3][7];
+						newMove->NextPosition = board->Board[1][5];
+						if (Model_CheckLegalMove(board, newMove, history))
+						{
+							return newMove;
+						}	
+					}
 				}	
 			}
 		
