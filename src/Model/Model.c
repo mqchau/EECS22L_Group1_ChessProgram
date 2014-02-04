@@ -31,7 +31,7 @@ ChessBoard * Model_PerformMove(ChessBoard * board, ChessMoveList * moveList, Che
 	  if(move->NextPosition->File == 1) {
 	    rookMove->MovePiece = board->Board[move->NextPosition->Rank][0]->Piece;
 	    rookMove->StartPosition = board->Board[move->NextPosition->Rank][0];
-	    rookMove->NextPosition = board->Board[move->NextPosition->Rank][2];
+	    rookMove->NextPosition = board->Board[move->NextPosition->Rank][3];
 	    rookMove->MoveType = Castling;
 
 	    rookMove->StartPosition->Piece->Coordinate = rookMove->NextPosition;
@@ -811,7 +811,7 @@ ChessCoordinateList * Model_GetLegalCoordinates(ChessBoard *chessboard, ChessPie
 		    targetRank = piece->Coordinate->Rank;
 		    if(!(chessboard->Board[targetRank][0]->Piece->MoveFirstFlag)) {
 		      if(chessboard->Board[targetRank][1]->Piece == NULL && chessboard->Board[targetRank][2]->Piece == NULL && chessboard->Board[targetRank][3]->Piece == NULL) {
-			output = ChessCoordinateList_AppendCoord(output,chessboard->Board[targetRank][1]);
+			output = ChessCoordinateList_AppendCoord(output,chessboard->Board[targetRank][2]);
 		      }
 		    }
 		  }
