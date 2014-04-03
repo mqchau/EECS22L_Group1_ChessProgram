@@ -7,7 +7,10 @@ ChessBoard * Model_Initialize(void){
 	return ChessBoard_Initialize();
 }
 
-/* move piece to next location */
+/* This function does what the title says: perform a move made by a player
+ * Input parameter is the actual board with all the pieces on it, a move list or move log, and the move to be performed
+ * The move will be concatenate to the end of the move list after the move is performed and the board will be updated
+ */
 ChessBoard * Model_PerformMove(ChessBoard * board, ChessMoveList * moveList, ChessMove * move)
 {	
   ChessMove *rookMove;
@@ -80,12 +83,13 @@ ChessBoard * Model_PerformMove(ChessBoard * board, ChessMoveList * moveList, Che
 	  /* update move list */
 	  ChessMoveList_AppendMove(moveList, move);
 	}	  
-
+	
+	/* This is for non special case move */
 	else {	
 	  /* the place to move to has an enemy piece */
 	  if (move->NextPosition->Piece != NULL)
 	    {
-	      /* send to grave yard*/
+	      /* send the piece to the grave yard*/
 	      move->CapturePiece = move->NextPosition->Piece;
 	      /* kill it */
 	      move->NextPosition->Piece->AliveFlag = False;
@@ -95,12 +99,17 @@ ChessBoard * Model_PerformMove(ChessBoard * board, ChessMoveList * moveList, Che
 	      /* it is dead */
 	      move->CaptureFlag = True;
 	    }
-	  /* piece to move, moved to next coordinate */
+	  /* piece to move: moved to next coordinate */
 	  assert(move->StartPosition);
 	  assert(move->StartPosition->Piece);
+	  
+	  /* this is its next position */
 	  move->StartPosition->Piece->Coordinate = move->NextPosition;
 	  move->NextPosition->Piece = move->MovePiece;	
+	  
+	  /* transformation is when a pawn reach the other side of the board and can be promoted */
 	  if(move->MoveType == Transformation) {
+	    /* promoting the pawn */
 	    move->MovePiece->Type = move->Transform_IntoType;
 	  }
 	
@@ -113,6 +122,7 @@ ChessBoard * Model_PerformMove(ChessBoard * board, ChessMoveList * moveList, Che
 	return board;
 }
 
+/* This function undo two moves. If it is white's turn, it will undo black's previous move and white's previous move. */
 ChessBoard * Model_UndoLastMove(ChessBoard * board, ChessMoveList * moveList)
 {
 
@@ -310,6 +320,7 @@ ChessMoveTypeEnum Model_GetMoveType(ChessBoard * board, ChessMove *move) {
     
 }
 
+/* This function get the legal move list of the opposite player */
 ChessCoordinateList * Model_GetAllLegalCoordinate( ChessBoard * board, ChessPlayer * player, ChessPlayer * PlayerInTurn, ChessMoveList * MoveList)
 {
 	int i = 0;
@@ -353,9 +364,10 @@ ChessCoordinateList * Model_GetAllLegalCoordinate( ChessBoard * board, ChessPlay
 	return newChessCoordinateList1;
 }
 
+/* This function checks to see if the current player is in check or not */
 Boolean Model_CheckCheckedPosition(ChessBoard * board, ChessPlayer * player, ChessMoveList * MoveList)
 {
-	/* grab list of legal move of other player */
+  /* grab list of legal move of other player */
   ChessCoordinateList * newList = Model_GetAllLegalCoordinate(board, player->OtherPlayer, player, MoveList);
 	
 	/*get the king of current player*/
@@ -370,9 +382,10 @@ Boolean Model_CheckCheckedPosition(ChessBoard * board, ChessPlayer * player, Che
 
 }
 
+/* Similar to top function, this function checks to see if the current player is in checkmate or not */
 Boolean Model_CheckCheckmate(ChessBoard * board, ChessPlayer * player, ChessMoveList * MoveList)
 {
-	
+  /* grab list of legal move of other player */	
   ChessCoordinateList * CurrPlayerPossibleCoords = Model_GetAllLegalCoordinate(board, player, player, MoveList);
   if (Model_CheckCheckedPosition(board, player, MoveList) &&  !CurrPlayerPossibleCoords->FirstNode)
 	{
@@ -844,8 +857,10 @@ ChessCoordinateList * Model_GetLegalCoordinates(ChessBoard *chessboard, ChessPie
 }
 
 
-/* uses GetLegalCoordinates */
-/* see if move is legal */
+/* uses GetLegalCoordinates. See if a movie is legal or not.
+ * The legal move will be highlighted on the board (not handled by this function)
+ * To check if a move is legal, the move will take place and then check to see if the king is in check 
+ */
 Boolean Model_CheckLegalMove(ChessBoard * board, ChessMove * moveTo, ChessMoveList * history)
 {
 	Boolean checkKing = False;
@@ -906,6 +921,7 @@ Boolean Model_CheckLegalMove(ChessBoard * board, ChessMove * moveTo, ChessMoveLi
 	return !checkKing;
 }
 
+/* Create a duplicate board */
 ChessBoard * Model_duplicateChessBoard(ChessBoard * tempBoard, ChessBoard * oldboard)
 {
   int rank, file;
